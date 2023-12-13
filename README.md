@@ -14,3 +14,5 @@ python3 loadBalancer.py --server_host 192.168.1.14 --server_port 8080
 
 docker run --name lb --rm -p 8000:8000 -e SERVER_HOST=192.168.1.14 -e SERVER_PORT=8080 loadbalancer
 
+
+[![Build and Publish Docker Images](https://github.com/aesaganda/simple_lb/actions/workflows/ghcr.yaml/badge.svg)](https://github.com/aesaganda/simple_lb/actions/workflows/ghcr.yaml)
