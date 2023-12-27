@@ -37,3 +37,14 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/lb:${{ github.sha }}
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/lb:latest
           platforms: linux/amd64,linux/arm64
+
+      - name: Build and push Docker image - iperf3
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          file: server.Dockerfile
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/lb:${{ github.sha }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/lb:latest
+          platforms: linux/amd64,linux/arm64
