@@ -8,4 +8,4 @@ RUN apk add --no-cache iperf3 htop
 EXPOSE 5201
 
 # Run iperf3 in server mode on container startup
-CMD ["iperf3", "-s"]
+CMD ["iperf3", "-c", "server"]
