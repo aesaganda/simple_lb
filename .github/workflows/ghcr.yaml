@@ -45,6 +45,6 @@ jobs:
           push: true
           file: server.Dockerfile
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/lb:${{ github.sha }}
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/lb:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/server:${{ github.sha }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/server:latest
           platforms: linux/amd64,linux/arm64
