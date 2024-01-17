@@ -5,8 +5,8 @@ import socket
 parser = argparse.ArgumentParser(description="A simple load balancer")
 
 # Add arguments for the server host and port
-parser.add_argument("--server_host", help="The server host", default="192.168.1.14")
-parser.add_argument("--server_port", help="The server port", type=int, default=8000)
+parser.add_argument("--server_host", help="The server host", default="localhost")
+parser.add_argument("--server_port", help="The server port", type=int, default=8080)
 
 # Parse the arguments
 args = parser.parse_args()
