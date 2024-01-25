@@ -42,7 +42,7 @@ jobs:
         with:
           context: .
           push: true
-          file: go/server/rr.Dockerfile
+          file: go/rr/rr.Dockerfile
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/rr:${{ github.sha }}
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/rr:latest
