@@ -32,7 +32,7 @@ jobs:
         with:
           context: .
           push: true
-          file: go/server/server.Dockerfile
+          file: ./go/server/server.Dockerfile
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/http_server:${{ github.sha }}
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/http_server:latest
@@ -43,7 +43,7 @@ jobs:
         with:
           context: .
           push: true
-          file: go/rr/rr.Dockerfile
+          file: ./go/rr/rr.Dockerfile
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/rr:${{ github.sha }}
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/rr:latest
@@ -54,7 +54,7 @@ jobs:
         with:
           context: .
           push: true
-          file: go/wrr/wrr.Dockerfile
+          file: ./go/wrr/wrr.Dockerfile
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/wrr:${{ github.sha }}
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/wrr:latest
@@ -66,7 +66,7 @@ jobs:
         with:
           context: .
           push: true
-          file: go/lcon/lcon.Dockerfile
+          file: ./go/lcon/lcon.Dockerfile
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/least_connections:${{ github.sha }}
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/least_connections:latest
@@ -77,7 +77,7 @@ jobs:
         with:
           context: .
           push: true
-          file: go/random/random.Dockerfile
+          file: ./go/random/random.Dockerfile
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/random:${{ github.sha }}
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/random:latest
