@@ -6,7 +6,7 @@ RUN apk add --no-cache iperf3
 # Set the Current Working Directory inside the container
 WORKDIR /app
 
-COPY random ./
+COPY go/random ./
 
 # Expose port 8080 to the outside world
 

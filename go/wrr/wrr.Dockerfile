@@ -7,7 +7,7 @@ RUN apk add --no-cache iperf3
 WORKDIR /app
 
 # Copy go mod and sum files
-COPY wrr ./
+COPY go/wrr ./
 
 # Expose port 8000 to the outside world
 EXPOSE 8000
