@@ -1,4 +1,7 @@
-FROM alpine:3.19
+FROM golang:alpine
+
+# Install iperf3
+RUN apk add --no-cache iperf3
 
 # Set the Current Working Directory inside the container
 WORKDIR /app
