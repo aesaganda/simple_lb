@@ -18,7 +18,7 @@ var servers []*Server
 
 func init() {
 	for i := 0; i < 3; i++ {
-		target, _ := url.Parse(fmt.Sprintf("http://%s:%d", "127.0.0.1", 8080+i))
+		target, _ := url.Parse(fmt.Sprintf("http://%s:%d", "0.0.0.0", 8080+i))
 
 		server := &Server{
 			URL:        target,

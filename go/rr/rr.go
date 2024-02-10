@@ -20,16 +20,16 @@ var currentIndex int
 var mutex sync.Mutex
 
 func init() {
-    for i := 0; i < 3; i++ {
-        target, _ := url.Parse(fmt.Sprintf("http://%s:%d", "127.0.0.1", 8080+i))
+	for i := 0; i < 3; i++ {
+		target, _ := url.Parse(fmt.Sprintf("http://%s:%d", "0.0.0.0", 8080+i))
 
-        server := &Server{
-            URL:        target,
-            ReverseURL: httputil.NewSingleHostReverseProxy(target),
-        }
+		server := &Server{
+			URL:        target,
+			ReverseURL: httputil.NewSingleHostReverseProxy(target),
+		}
 
-        servers = append(servers, server)
-    }
+		servers = append(servers, server)
+	}
 }
 
 func getNextServer() *Server {

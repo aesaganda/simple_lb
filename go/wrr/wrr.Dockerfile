@@ -1,4 +1,4 @@
-FROM alpine:3.19
+FROM golang:alpine
 
 # Install iperf3
 RUN apk add --no-cache iperf3
@@ -7,7 +7,16 @@ RUN apk add --no-cache iperf3
 WORKDIR /app
 
 # Copy go mod and sum files
-COPY go/wrr ./
+COPY . .
+
+# Set the GOPATH
+ENV GOPATH /go
+
+# Get dependencies using go get
+RUN go get -d -v
+
+# Build the Go app
+RUN go build -o wrr .
 
 # Expose port 8000 to the outside world
 EXPOSE 8000

@@ -6,11 +6,20 @@ RUN apk add --no-cache iperf3
 # Set the Current Working Directory inside the container
 WORKDIR /app
 
-COPY go/random ./
+# Copy go mod and sum files
+COPY . .
 
-# Expose port 8080 to the outside world
+# Set the GOPATH
+ENV GOPATH /go
 
-EXPOSE 8080
+# Get dependencies using go get
+RUN go get -d -v
+
+# Build the Go app
+RUN go build -o random .
+
+# Expose port 8000 to the outside world
+EXPOSE 8000
 
 # Command to run the executable
 CMD ["./random"]
