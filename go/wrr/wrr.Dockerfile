@@ -13,7 +13,7 @@ COPY . .
 ENV GOPATH /go
 
 # Get dependencies using go install
-RUN go install -v
+RUN go install -v -mod=readonly
 
 # Build the Go app
 RUN go build -o wrr .
