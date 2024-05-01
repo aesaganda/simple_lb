@@ -29,7 +29,7 @@ jobs:
       - name: Build and push Docker image - http_server
         uses: docker/build-push-action@v2
         with:
-          context: .
+          context: server
           push: true
           file: go/server/server.Dockerfile
           tags: |
@@ -40,7 +40,7 @@ jobs:
       - name: Build and push Docker image - round_robin
         uses: docker/build-push-action@v2
         with:
-          context: .
+          context: rr
           push: true
           file: go/rr/rr.Dockerfile
           tags: |
@@ -51,7 +51,7 @@ jobs:
       - name: Build and push Docker image - weighted_round_robin
         uses: docker/build-push-action@v2
         with:
-          context: .
+          context: wrr
           push: true
           file: go/wrr/wrr.Dockerfile
           tags: |
@@ -62,7 +62,7 @@ jobs:
       - name: Build and push Docker image - least_connections
         uses: docker/build-push-action@v2
         with:
-          context: .
+          context: lcon
           push: true
           file: go/lcon/lcon.Dockerfile
           tags: |
@@ -73,7 +73,7 @@ jobs:
       - name: Build and push Docker image - random
         uses: docker/build-push-action@v2
         with:
-          context: .
+          context: random
           push: true
           file: go/random/random.Dockerfile
           tags: |

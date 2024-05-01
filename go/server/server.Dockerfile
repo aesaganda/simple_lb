@@ -8,7 +8,7 @@ LABEL maintainer="A.Eren Sağanda <erensaganda@gmail.com>"
 WORKDIR /app
 
 # Download Go modules
-COPY server/go.mod ./
+COPY go.mod ./
 RUN go mod download
 
 # Copy the source code. Note the slash at the end, as explained in
