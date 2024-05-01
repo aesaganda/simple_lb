@@ -7,16 +7,17 @@ RUN apk add --no-cache iperf3
 WORKDIR /app
 
 # Copy go mod and sum files
-COPY . .
+COPY go.mod ./
+RUN go mod download
 
-# Set the GOPATH
-ENV GOPATH /go
+# Copy the source code. Note the slash at the end, as explained in
+# https://docs.docker.com/reference/dockerfile/#copy
+COPY *.go ./
 
-# Get dependencies using go install
-RUN go install -v -mod=readonly
+
 
 # Build the Go app
-RUN go build -o random .
+RUN CGO_ENABLED=0 GOOS=linux go build -o random .
 
 # Expose port 8000 to the outside world
 EXPOSE 8000

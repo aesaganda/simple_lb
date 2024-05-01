@@ -7,17 +7,16 @@ LABEL maintainer="A.Eren Sağanda <erensaganda@gmail.com>"
 # Set the Current Working Directory inside the container
 WORKDIR /app
 
-# Copy the source from the current directory to the Working Directory inside the container
-COPY . .
+# Download Go modules
+COPY go.mod ./
+RUN go mod download
 
-# Set the GOPATH
-ENV GOPATH /go
-
-# Get dependencies using go install
-RUN go install -v -mod=readonly
+# Copy the source code. Note the slash at the end, as explained in
+# https://docs.docker.com/reference/dockerfile/#copy
+COPY *.go ./
 
 # Build the Go app
-RUN go build -o server .
+RUN CGO_ENABLED=0 GOOS=linux go build -o server .
 
 # Expose port 8080 to the outside
 EXPOSE 8080
