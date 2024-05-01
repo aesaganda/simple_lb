@@ -14,7 +14,7 @@ COPY . .
 ENV GOPATH /go
 
 # Get dependencies using go install
-RUN go install -d -v
+RUN go install -v
 
 # Build the Go app
 RUN go build -o server .
