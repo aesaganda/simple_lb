@@ -7,7 +7,7 @@ RUN apk add --no-cache iperf3
 WORKDIR /app
 
 # Copy go mod and sum files
-COPY go.mod ./
+COPY random/go.mod ./
 RUN go mod download
 
 # Copy the source code. Note the slash at the end, as explained in
