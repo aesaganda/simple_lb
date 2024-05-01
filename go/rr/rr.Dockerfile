@@ -1,4 +1,4 @@
-FROM golang
+FROM golang:alpine
 
 # Install iperf3
 RUN apk add --no-cache iperf3
