@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io"
 	"net"
 	"net/http"
 )
@@ -53,9 +54,25 @@ func main() {
 }
 
 func handleTCPConnection(conn net.Conn) {
-	defer conn.Close()
-	fmt.Printf("Received TCP connection from %s\n", conn.RemoteAddr().String())
+    defer conn.Close()
+    fmt.Printf("Received TCP connection from %s\n", conn.RemoteAddr().String())
 
-	// Add your TCP connection handling logic here
-	// Example: Read data from connection using conn.Read(...)
+    // Data handling loop
+    for {
+        // Read data from the client connection
+        buffer := make([]byte, 1024)  // Example buffer size
+        n, err := conn.Read(buffer)
+        if err != nil {
+            if err != io.EOF { //  Handle non-EOF errors
+                fmt.Println("Error reading from connection:", err)
+            }
+            break // Connection closed (either error or intentionally by the client)
+        }
+
+        // Process the received data (do something with buffer[:n]) 
+        fmt.Println("Received data:", string(buffer[:n])) 
+
+        // Optionally send a response back to the client 
+        // conn.Write(...) 
+    }
 }

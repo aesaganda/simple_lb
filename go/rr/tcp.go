@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"io"
 	"net"
@@ -8,7 +9,7 @@ import (
 	"net/http/httputil"
 	"net/url"
 	"sync"
-    "flag"
+
 	"github.com/gorilla/mux"
 )
 
@@ -54,27 +55,47 @@ func handleHTTPRequest(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleTCPConnection(clientConn net.Conn) {
-	defer clientConn.Close()
+    defer clientConn.Close()
 
-	selectedServer := getNextServer()
-	backendConn, err := net.Dial("tcp", selectedServer.URL.Host)
-	if err != nil {
-		fmt.Println("Error connecting to backend server:", err)
-		return
-	}
-	defer backendConn.Close()
+    selectedServer := getNextServer()
+    host, port, err := net.SplitHostPort(selectedServer.URL.Host)
+    if err != nil {
+        fmt.Println("Error splitting host and port:", err)
+        return
+    }
+    // backendConn, err := net.Dial("tcp", net.JoinHostPort(host, port))
+    backendConn, err := net.Dial("tcp", net.JoinHostPort(host, port))
 
-	// Print TCP Connection Information
-	fmt.Printf("Received TCP connection from %s, forwarding to %s\n",
-		clientConn.RemoteAddr().String(), backendConn.RemoteAddr().String())
+    if err != nil {
+        fmt.Println("Error connecting to backend server:", err)
+        return
+    }
+    defer backendConn.Close()
 
-	go func() {
-		io.Copy(backendConn, clientConn)
-	}()
+    // Print TCP Connection Information
+    fmt.Printf("Received TCP connection from %s, forwarding to %s\n",
+        clientConn.RemoteAddr().String(), backendConn.RemoteAddr().String())
 
-	go func() {
-		io.Copy(clientConn, backendConn)
-	}()
+    var wg sync.WaitGroup
+    wg.Add(2)
+
+    go func() {
+        defer wg.Done()
+        _, err := io.Copy(backendConn, clientConn)
+        if err != nil {
+            fmt.Println("Error forwarding data to backend server:", err)
+        }
+    }()
+
+    go func() {
+        defer wg.Done()
+        _, err := io.Copy(clientConn, backendConn)
+        if err != nil {
+            fmt.Println("Error forwarding data to client:", err)
+        }
+    }()
+
+    wg.Wait()
 }
 
 func main() {
