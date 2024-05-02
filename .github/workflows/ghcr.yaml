@@ -26,17 +26,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push Docker image - http_server
-        uses: docker/build-push-action@v2
-        with:
-          context: go/server
-          push: true
-          file: go/server/server.Dockerfile
-          tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/http_server:${{ github.sha }}
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/http_server:latest
-          platforms: linux/amd64,linux/arm64
-
       - name: Build and push Docker image - round_robin
         uses: docker/build-push-action@v2
         with:
@@ -79,4 +68,15 @@ jobs:
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/random:${{ github.sha }}
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/random:latest
+          platforms: linux/amd64,linux/arm64
+
+      - name: Build and push Docker image - http_server
+        uses: docker/build-push-action@v2
+        with:
+          context: go/server
+          push: true
+          file: go/server/server.Dockerfile
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/http_server:${{ github.sha }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/http_server:latest
           platforms: linux/amd64,linux/arm64
