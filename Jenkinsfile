@@ -38,17 +38,17 @@ pipeline {
         }
         stage('Download twistcli') {
             steps {
-                container('jnlp') {
+                container('docker') {
                     sh """
-               curl -s -L -o twistcli https://utd-packages.s3.amazonaws.com/twistcli
-               chmod +x twistcli
-            """
+               wget -q -O twistcli https://utd-packages.s3.amazonaws.com/twistcli
+               chmod +x twistcli
+            """
                 }
             }
         }
         stage('Scan Docker Image with Twistlock') {
             steps {
-                container('jnlp') {
+                container('docker') {
                     sh """
                ./twistcli images scan \\
                --address https://twistlock1.garanti.lab:8083/ \\
