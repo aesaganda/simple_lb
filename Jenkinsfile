@@ -8,6 +8,7 @@ pipeline {
   environment {
     IMAGE_NAME = 'aesaganda/jenkins-lb'
     IMAGE_TAG = 'latest'
+    DOCKER_CREDENTIALS_ID = 'dockerhub-creds'
   }
 
   stages {
