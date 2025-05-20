@@ -36,16 +36,16 @@ pipeline {
                 }
             }
         }
-        stage('Download twistcli') {
-            steps {
-                container('docker') {
-                    sh """
-               wget -q -O twistcli https://utd-packages.s3.amazonaws.com/twistcli
-               chmod +x twistcli
+        stage('Download twistcli') {
+            steps {
+                container('docker') {
+                    sh """
+wget -q -O twistcli https://utd-packages.s3.amazonaws.com/twistcli
+chmod +x twistcli
             """
-                }
-            }
-        }
+                }
+            }
+        }
         stage('Scan Docker Image with Twistlock') {
             steps {
                 container('docker') {
