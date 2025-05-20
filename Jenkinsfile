@@ -6,7 +6,7 @@ pipeline {
   }
 
   environment {
-    IMAGE_NAME = 'aesaganda/rrimage'
+    IMAGE_NAME = 'aesaganda/jenkins-lb'
     IMAGE_TAG = 'latest'
   }
 
@@ -21,7 +21,7 @@ pipeline {
       steps {
         container('docker') {
           sh """
-            docker build -t ${IMAGE_NAME}:${IMAGE_TAG} -f go/rr/rr.Dockerfile go/rr
+            docker build -t ${IMAGE_NAME}:${IMAGE_TAG} -f python/lb.Dockerfile python
           """
         }
       }
