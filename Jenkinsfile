@@ -1,5 +1,9 @@
 pipeline {
-  agent any
+  agent {
+    kubernetes {
+      label 'docker'
+    }
+  }
 
   environment {
     IMAGE_NAME = 'aesaganda/rrimage'
